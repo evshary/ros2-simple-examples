@@ -13,7 +13,7 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='chenying',
+    maintainer='ChenYing Kuo',
     maintainer_email='evshary@gmail.com',
     description='Simple Python Service and Client Demo',
     license='BSD',
