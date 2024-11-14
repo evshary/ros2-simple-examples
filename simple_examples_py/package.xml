@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>py_service_client</name>
+  <name>simple_examples_py</name>
   <version>1.0.0</version>
   <description>Simple Python Service and Client Demo</description>
   <maintainer email="evshary@gmail.com">ChenYing Kuo</maintainer>

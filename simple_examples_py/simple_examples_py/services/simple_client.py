@@ -7,7 +7,7 @@ from rclpy.executors import ExternalShutdownException
 def main(args=None):
     try:
         with rclpy.init(args=args):
-            node = rclpy.create_node('example_client_py')
+            node = rclpy.create_node('simple_client_py')
 
             cli = node.create_client(ExampleService, 'example_service_name')
             while not cli.wait_for_service(timeout_sec=1.0):

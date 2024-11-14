@@ -7,7 +7,7 @@ from rclpy.node import Node
 class ExampleServer(Node):
 
     def __init__(self):
-        super().__init__('example_server_py')
+        super().__init__('simple_server_py')
         self.srv = self.create_service(ExampleService, 'example_service_name', self.response_callback)
 
     def response_callback(self, request, response):

@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'py_service_client'
+package_name = 'simple_examples_py'
 
 setup(
     name=package_name,
@@ -20,8 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'example_client = py_service_client.example_client:main',
-            'example_server = py_service_client.example_server:main'
+            'example_client = simple_examples_py.services.simple_client:main',
+            'example_server = simple_examples_py.services.simple_server:main'
         ],
     },
 )
