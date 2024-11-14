@@ -20,8 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'add_two_ints_client = demo_nodes_py.services.add_two_ints_client:main',
-            'add_two_ints_server = demo_nodes_py.services.add_two_ints_server:main'
+            'example_client = py_service_client.example_client:main',
+            'example_server = py_service_client.example_server:main'
         ],
     },
 )
