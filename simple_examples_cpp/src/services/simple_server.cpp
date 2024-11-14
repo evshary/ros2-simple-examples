@@ -3,14 +3,14 @@
 
 #include "simple_interfaces/srv/example_service.hpp"
 
-namespace example_server_node
+namespace simple_server_node
 {
 
-class ExampleServerNode : public rclcpp::Node
+class SimpleServerNode : public rclcpp::Node
 {
 public:
-  explicit ExampleServerNode(const rclcpp::NodeOptions & options)
-  : Node("example_server_cpp", options)
+  explicit SimpleServerNode(const rclcpp::NodeOptions & options)
+  : Node("simple_server_cpp", options)
   {
     setvbuf(stdout, NULL, _IONBF, BUFSIZ);
     auto handle_example_service =
@@ -32,4 +32,4 @@ private:
 
 }
 
-RCLCPP_COMPONENTS_REGISTER_NODE(example_server_node::ExampleServerNode)
+RCLCPP_COMPONENTS_REGISTER_NODE(simple_server_node::SimpleServerNode)

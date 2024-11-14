@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(cpp_service_client)
+project(simple_examples_cpp)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -23,14 +23,14 @@ find_package(rclcpp_components REQUIRED)
 
 # For server
 add_library(server_lib SHARED 
-  src/example_server.cpp)
+  src/services/simple_server.cpp)
 ament_target_dependencies(server_lib
   "simple_interfaces"
   "rclcpp"
   "rclcpp_components")
 rclcpp_components_register_node(server_lib
-  PLUGIN "example_server_node::ExampleServerNode"
-  EXECUTABLE example_server)
+  PLUGIN "simple_server_node::SimpleServerNode"
+  EXECUTABLE simple_server)
 install(TARGETS
   server_lib
   ARCHIVE DESTINATION lib
@@ -38,11 +38,11 @@ install(TARGETS
   RUNTIME DESTINATION bin)
 
 # For client
-add_executable(example_client src/example_client.cpp)
-ament_target_dependencies(example_client
+add_executable(simple_client src/services/simple_client.cpp)
+ament_target_dependencies(simple_client
   "simple_interfaces"
   "rclcpp")
-install(TARGETS example_client
+install(TARGETS simple_client
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
