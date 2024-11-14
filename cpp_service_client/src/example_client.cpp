@@ -1,13 +1,13 @@
 #include "rclcpp/rclcpp.hpp"
 
-#include "service_interfaces/srv/example_service.hpp"
+#include "simple_interfaces/srv/example_service.hpp"
 
 using namespace std::chrono_literals;  // used by 1s
 
-service_interfaces::srv::ExampleService::Response::SharedPtr send_request(
+simple_interfaces::srv::ExampleService::Response::SharedPtr send_request(
     rclcpp::Node::SharedPtr node,
-    rclcpp::Client<service_interfaces::srv::ExampleService>::SharedPtr client,
-    service_interfaces::srv::ExampleService::Request::SharedPtr request)
+    rclcpp::Client<simple_interfaces::srv::ExampleService>::SharedPtr client,
+    simple_interfaces::srv::ExampleService::Request::SharedPtr request)
 {
     auto result = client->async_send_request(request);
     // Waiting
@@ -26,10 +26,10 @@ int main(int argc, char *argv[]) {
     // Node name
     auto node = rclcpp::Node::make_shared("example_client_cpp");
     // Ceraete a client to query service name "example_service_name"
-    auto client = node->create_client<service_interfaces::srv::ExampleService>("example_service_name");
+    auto client = node->create_client<simple_interfaces::srv::ExampleService>("example_service_name");
 
     // Build the request
-    auto request = std::make_shared<service_interfaces::srv::ExampleService::Request>();
+    auto request = std::make_shared<simple_interfaces::srv::ExampleService::Request>();
     request->param = 1;
 
     //// Waiting until the service is up

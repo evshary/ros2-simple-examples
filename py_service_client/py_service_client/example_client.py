@@ -1,4 +1,4 @@
-from service_interfaces.srv import ExampleService
+from simple_interfaces.srv import ExampleService
 
 import rclpy
 from rclpy.executors import ExternalShutdownException

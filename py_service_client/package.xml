@@ -7,7 +7,7 @@
   <maintainer email="evshary@gmail.com">ChenYing Kuo</maintainer>
   <license>BSD</license>
 
-  <exec_depend>service_interfaces</exec_depend>
+  <exec_depend>simple_interfaces</exec_depend>
   <exec_depend>rclpy</exec_depend>
 
   <test_depend>ament_copyright</test_depend>

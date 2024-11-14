@@ -17,7 +17,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(service_interfaces REQUIRED) # Our own Interface
+find_package(simple_interfaces REQUIRED) # Our own Interface
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 
@@ -25,7 +25,7 @@ find_package(rclcpp_components REQUIRED)
 add_library(server_lib SHARED 
   src/example_server.cpp)
 ament_target_dependencies(server_lib
-  "service_interfaces"
+  "simple_interfaces"
   "rclcpp"
   "rclcpp_components")
 rclcpp_components_register_node(server_lib
@@ -40,7 +40,7 @@ install(TARGETS
 # For client
 add_executable(example_client src/example_client.cpp)
 ament_target_dependencies(example_client
-  "service_interfaces"
+  "simple_interfaces"
   "rclcpp")
 install(TARGETS example_client
   DESTINATION lib/${PROJECT_NAME})

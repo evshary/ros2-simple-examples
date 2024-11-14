@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>service_interfaces</name>
+  <name>simple_interfaces</name>
   <version>1.0.0</version>
-  <description>Service Interfaces Demo</description>
+  <description>Simple Interfaces Demo</description>
   <maintainer email="evshary@gmail.com">ChenYing Kuo</maintainer>
   <license>BSD</license>
 
