@@ -10,7 +10,7 @@ class ExampleServerNode : public rclcpp::Node
 {
 public:
   explicit ExampleServerNode(const rclcpp::NodeOptions & options)
-  : Node("example_server", options)
+  : Node("example_server_cpp", options)
   {
     setvbuf(stdout, NULL, _IONBF, BUFSIZ);
     auto handle_example_service =

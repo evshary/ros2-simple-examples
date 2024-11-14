@@ -1,36 +1,28 @@
-from example_interfaces.srv import AddTwoInts
+from service_interfaces.srv import ExampleService
 
 import rclpy
 from rclpy.node import Node
 
 
-class AddTwoIntsServer(Node):
+class ExampleServer(Node):
 
     def __init__(self):
-        super().__init__('add_two_ints_server')
-        self.srv = self.create_service(AddTwoInts, 'add_two_ints', self.add_two_ints_callback)
+        super().__init__('example_server_py')
+        self.srv = self.create_service(ExampleService, 'example_service_name', self.response_callback)
 
-    def add_two_ints_callback(self, request, response):
-        response.sum = request.a + request.b
-        self.get_logger().info('Incoming request\na: %d b: %d' % (request.a, request.b))
-
+    def response_callback(self, request, response):
+        self.get_logger().info('Incoming request: param=%d' % (request.param))
+        response.result = 0
         return response
 
 
 def main(args=None):
-    rclpy.init(args=args)
-
-    node = AddTwoIntsServer()
-
     try:
-        rclpy.spin(node)
+        with rclpy.init(args=args):
+            node = ExampleServer()
+            rclpy.spin(node)
     except KeyboardInterrupt:
         pass
-
-    # Destroy the node explicitly
-    # (optional - Done automatically when node is garbage collected)
-    node.destroy_node()
-    rclpy.shutdown()
 
 
 if __name__ == '__main__':

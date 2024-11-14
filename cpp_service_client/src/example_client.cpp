@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     rclcpp::init(argc, argv);
 
     // Node name
-    auto node = rclcpp::Node::make_shared("example_client");
+    auto node = rclcpp::Node::make_shared("example_client_cpp");
     // Ceraete a client to query service name "example_service_name"
     auto client = node->create_client<service_interfaces::srv::ExampleService>("example_service_name");
 
