@@ -9,6 +9,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/ExampleTopic.msg"
   "srv/ExampleService.srv"
 )
 ament_export_dependencies(rosidl_default_runtime)
