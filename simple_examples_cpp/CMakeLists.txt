@@ -20,6 +20,7 @@ find_package(ament_cmake REQUIRED)
 find_package(simple_interfaces REQUIRED) # Our own Interface
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
+find_package(std_msgs REQUIRED)
 
 # For server
 add_library(server_lib SHARED 
@@ -43,6 +44,18 @@ ament_target_dependencies(simple_client
   "simple_interfaces"
   "rclcpp")
 install(TARGETS simple_client
+  DESTINATION lib/${PROJECT_NAME})
+
+# For QoS
+## publisher
+add_executable(qos_pub src/qos/pub.cpp)
+ament_target_dependencies(qos_pub rclcpp std_msgs)
+## subscriber
+add_executable(qos_sub src/qos/sub.cpp)
+ament_target_dependencies(qos_sub rclcpp std_msgs)
+install(TARGETS
+  qos_pub
+  qos_sub
   DESTINATION lib/${PROJECT_NAME})
 
 ament_package()

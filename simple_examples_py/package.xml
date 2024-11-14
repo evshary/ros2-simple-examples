@@ -3,7 +3,7 @@
 <package format="3">
   <name>simple_examples_py</name>
   <version>1.0.0</version>
-  <description>Simple Python Service and Client Demo</description>
+  <description>Simple Python ROS 2 example</description>
   <maintainer email="evshary@gmail.com">ChenYing Kuo</maintainer>
   <license>BSD</license>
 

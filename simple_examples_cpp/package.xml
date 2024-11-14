@@ -3,7 +3,7 @@
 <package format="3">
   <name>simple_examples_cpp</name>
   <version>1.0.0</version>
-  <description>Simple service and client demo</description>
+  <description>Simple C++ ROS 2 example</description>
   <maintainer email="evshary@gmail.com">ChenYing Kuo</maintainer>
   <license>BSD</license>
 
