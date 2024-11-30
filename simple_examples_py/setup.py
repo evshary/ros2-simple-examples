@@ -16,7 +16,7 @@ setup(
     maintainer='ChenYing Kuo',
     maintainer_email='evshary@gmail.com',
     description='Simple Python Service and Client Demo',
-    license='BSD',
+    license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [

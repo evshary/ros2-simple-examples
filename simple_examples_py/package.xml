@@ -5,7 +5,7 @@
   <version>1.0.0</version>
   <description>Simple Python ROS 2 example</description>
   <maintainer email="evshary@gmail.com">ChenYing Kuo</maintainer>
-  <license>BSD</license>
+  <license>Apache License 2.0</license>
 
   <exec_depend>simple_interfaces</exec_depend>
   <exec_depend>rclpy</exec_depend>
