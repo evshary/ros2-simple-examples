@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "**"
+  # Able to call by other workflow
+  workflow_call:
+  # Able to call on GitHub
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  markdown_lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: articulate/actions-markdownlint@v1
+        with:
+          config: .markdownlint.yaml
+          files: '*.md'
+          ignore: target
+          version: 0.28.1
+
+  build_test_ros2:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: ros-tooling/setup-ros@v0.7
+      with:
+        required-ros-distributions: jazzy
+    - uses: ros-tooling/action-ros-ci@v0.3
+      with:
+        package-name: simple_interfaces simple_examples_cpp simple_examples_py
+        target-ros2-distro: jazzy
+        colcon-defaults: |
+          {
+            "build": {
+              "cmake-args": [
+                "-DCMAKE_CXX_FLAGS=\"-Werror\""
+              ]
+            }
+          }
+    - uses: actions/upload-artifact@v4
+      with:
+        name: colcon-logs
+        path: ros_ws/log
