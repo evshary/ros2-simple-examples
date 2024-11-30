@@ -1,7 +1,6 @@
-from simple_interfaces.srv import ExampleService
-
 import rclpy
 from rclpy.executors import ExternalShutdownException
+from simple_interfaces.srv import ExampleService
 
 
 def main(args=None):

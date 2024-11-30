@@ -1,7 +1,6 @@
-from simple_interfaces.srv import ExampleService
-
 import rclpy
 from rclpy.node import Node
+from simple_interfaces.srv import ExampleService
 
 
 class ExampleServer(Node):
