@@ -29,6 +29,8 @@ jobs:
 
   build_test_ros2:
     runs-on: ubuntu-latest
+    container:
+      image: rostooling/setup-ros-docker:ubuntu-noble-latest
     steps:
     - uses: ros-tooling/setup-ros@v0.7
       with:
