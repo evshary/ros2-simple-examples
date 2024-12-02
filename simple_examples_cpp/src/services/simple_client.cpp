@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     auto request = std::make_shared<simple_interfaces::srv::ExampleService::Request>();
     request->param = 1;
 
-    //// Waiting until the service is up
+    // Waiting until the service is up
     while (!client->wait_for_service(1s)) {
         if (!rclcpp::ok()) {
             RCLCPP_ERROR(node->get_logger(), "Catch interrupt and stop the program!");

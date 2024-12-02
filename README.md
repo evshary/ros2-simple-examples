@@ -6,13 +6,13 @@ Some ROS 2 examples for testing
 
 ```shell
 # C++ server
-ros2 run simple_examples_cpp example_server
+ros2 run simple_examples_cpp simple_server
 # C++ client
-ros2 run simple_examples_cpp example_client
+ros2 run simple_examples_cpp simple_client
 # Python server
-ros2 run simple_examples_py add_two_ints_server
+ros2 run simple_examples_py simple_server
 # Python client
-ros2 run simple_examples_py add_two_ints_client
+ros2 run simple_examples_py simple_client
 ```
 
 ## QoS
