@@ -22,3 +22,10 @@ ros2 run simple_examples_py simple_client
 ros2 run simple_examples_cpp qos_pub
 ros2 run simple_examples_cpp qos_sub
 ```
+
+## Timer
+
+```shell
+# C++ Timer
+ros2 run simple_examples_cpp timer
+```

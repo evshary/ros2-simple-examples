@@ -46,6 +46,11 @@ ament_target_dependencies(simple_client
 install(TARGETS simple_client
   DESTINATION lib/${PROJECT_NAME})
 
+# For timer
+add_executable(timer src/timer/timer.cpp)
+ament_target_dependencies(timer "rclcpp")
+install(TARGETS timer DESTINATION lib/${PROJECT_NAME})
+
 # For QoS
 ## publisher
 add_executable(qos_pub src/qos/pub.cpp)
