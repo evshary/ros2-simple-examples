@@ -7,70 +7,57 @@ class TimerToggleNode : public rclcpp::Node
 {
 public:
     TimerToggleNode()
-        : Node("timer_toggle_node"), timer_ab_enabled_(true)
+        : Node("timer_toggle_node"), timer_enabled_(false)
     {
-        timer_a_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
-        timer_b_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
-        timer_c_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+        timer_toggle_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
 
-        timer_a_ = this->create_wall_timer(
-            std::chrono::milliseconds(100),
-            std::bind(&TimerToggleNode::on_timer_a, this),
-            timer_a_group_);
-        timer_a_->reset();
-
-        timer_b_ = this->create_wall_timer(
-            std::chrono::milliseconds(100),
-            std::bind(&TimerToggleNode::on_timer_b, this),
-            timer_b_group_);
-        timer_b_->reset();
-
-        timer_c_ = this->create_wall_timer(
+        timer_toggle_ = this->create_wall_timer(
             std::chrono::milliseconds(1000),
-            std::bind(&TimerToggleNode::on_timer_c, this),
-            timer_c_group_);
+            std::bind(&TimerToggleNode::timer_toggle_callback, this),
+            timer_toggle_group_);
     }
 
 private:
-    void on_timer_a()
+    void timer_node_callback()
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
-        RCLCPP_INFO(this->get_logger(), "Timer a: Data received");
+        // Make the callback run most of the time
+        std::this_thread::sleep_for(std::chrono::milliseconds(190));
+        std::cout << "Timer Callback is triggered at thread " << std::this_thread::get_id() << std::endl;
     }
 
-    void on_timer_b()
+    void timer_toggle_callback()
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
-        RCLCPP_INFO(this->get_logger(), "Timer b: Data received");
-    }
-
-    void on_timer_c()
-    {
-        if (timer_ab_enabled_)
+        std::cout << "Timer Toggle is set to " << timer_enabled_ << " at thread " << std::this_thread::get_id() << std::endl;
+        if (timer_enabled_)
         {
-            timer_a_->cancel();  // Stop timer_a
-            timer_b_->cancel();  // Stop timer_b
-            RCLCPP_INFO(this->get_logger(), "Timer A disabled");
-            RCLCPP_INFO(this->get_logger(), "Timer B disabled");
+            // Stop the timer
+            timer_node_->cancel();
+            // Release the timer
+            timer_node_ = nullptr;
+            timer_node_group_ = nullptr;
+
+            RCLCPP_INFO(this->get_logger(), "Timer Node disabled");
         }
         else
         {
-            timer_a_->reset();  // Restart timer_a
-            timer_b_->reset();  // Restart timer_b
-            RCLCPP_INFO(this->get_logger(), "Timer A enabled");
-            RCLCPP_INFO(this->get_logger(), "Timer B enabled");
+            timer_node_group_ = this->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive);
+            timer_node_ = this->create_wall_timer(
+                std::chrono::milliseconds(200),
+                std::bind(&TimerToggleNode::timer_node_callback, this),
+                timer_node_group_);
+            timer_node_->reset();
+
+            RCLCPP_INFO(this->get_logger(), "Timer Node enabled");
         }
-        timer_ab_enabled_ = !timer_ab_enabled_;
+        timer_enabled_ = !timer_enabled_;
     }
 
-    rclcpp::TimerBase::SharedPtr timer_a_;
-    rclcpp::TimerBase::SharedPtr timer_b_;
-    rclcpp::TimerBase::SharedPtr timer_c_;
-    bool timer_ab_enabled_;
+    rclcpp::TimerBase::SharedPtr timer_node_;
+    rclcpp::TimerBase::SharedPtr timer_toggle_;
+    bool timer_enabled_;
 
-    rclcpp::CallbackGroup::SharedPtr timer_a_group_;
-    rclcpp::CallbackGroup::SharedPtr timer_b_group_;
-    rclcpp::CallbackGroup::SharedPtr timer_c_group_;
+    rclcpp::CallbackGroup::SharedPtr timer_node_group_;
+    rclcpp::CallbackGroup::SharedPtr timer_toggle_group_;
 };
 
 int main(int argc, char **argv)
@@ -79,7 +66,9 @@ int main(int argc, char **argv)
     auto node = std::make_shared<TimerToggleNode>();
 
     rclcpp::ExecutorOptions options;
-    rclcpp::executors::MultiThreadedExecutor executor(options, 10);
+    // Run with 2 threads
+    rclcpp::executors::MultiThreadedExecutor executor(options, 2);
+    //rclcpp::executors::SingleThreadedExecutor executor(options);
     executor.add_node(node);
     executor.spin();
 
